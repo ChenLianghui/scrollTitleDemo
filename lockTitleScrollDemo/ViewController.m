@@ -72,16 +72,14 @@
 }
 - (IBAction)reduceItem:(UIButton *)sender {
     NSMutableArray *array = self.headView.lockArray;
-    
-
-    if (array.count == 4) {
-        NSLog(@"item的数量不能少于4个！");
-        return;
+    int currentNumber = (int)_selectindexPath.item;
+    if (currentNumber<array.count-1) {
+        [array removeLastObject];
+        self.headView.lockArray = array;
+        [self.headView.collectionView reloadData];
+    }else{
+        NSLog(@"只能删除选中之后的item！");
     }
-    
-    [array removeLastObject];
-    self.headView.lockArray = array;
-    [self.headView.collectionView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
